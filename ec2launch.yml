@@ -1,0 +1,29 @@
+---
+- name: Create a new EC2 instance
+  hosts: localhost
+  gather_facts: False
+
+  vars:
+      region: ap-south-1b
+      instance_type: t2.micro
+      ami: ami-e60e5a89  # Ubuntu 16.04 LTS
+      keypair: crevise # pem file name
+  
+  tasks:
+
+    - name: Create an ec2 instance
+      ec2:
+         key_name: "{{ keypair }}"
+         group: default  # security group name
+         instance_type: "{{ instance_type}}"
+         image: "{{ ami }}"
+         wait: true
+         region: "{{ region }}"
+         count: 1  # default
+         count_tag:
+            Name: Crevise
+         instance_tags:
+            Name: Crevise
+         vpc_subnet_id: subnet-4cff7c01
+         assign_public_ip: yes
+      register: ec2
