@@ -4,9 +4,9 @@
   gather_facts: False
 
   vars:
-      region: ap-south-1b
+      region: ap-south-1
       instance_type: t2.micro
-      ami: ami-e60e5a89  # Ubuntu 16.04 LTS
+      ami: ami-e60e5a89  # RHEL
       keypair: crevise # pem file name
   
   tasks:
